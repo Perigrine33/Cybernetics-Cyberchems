@@ -3,7 +3,6 @@ package com.perigrine3.cyberchems.effects;
 import com.perigrine3.createcybernetics.common.capabilities.ModAttachments;
 import com.perigrine3.createcybernetics.common.capabilities.PlayerCyberwareData;
 import com.perigrine3.createcybernetics.util.ModTags;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,7 +14,7 @@ import java.util.Collection;
 
 public class ImmunoboostEffect extends MobEffect {
 
-    private static final String NBT_APPLIED = "cc_immunoboost_humanity_applied";
+    public static final String HUMANITY_KEY = "cc_drug_penalty_immunoboost";
     private static final int HUMANITY_PENALTY = 25;
 
     private static final int ROLL_INTERVAL_TICKS = 20;
@@ -38,11 +37,7 @@ public class ImmunoboostEffect extends MobEffect {
         PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
         if (data == null) return true;
 
-        CompoundTag pd = player.getPersistentData();
-        if (!pd.getBoolean(NBT_APPLIED)) {
-            data.setHumanity(data.getHumanityBase() - HUMANITY_PENALTY);
-            pd.putBoolean(NBT_APPLIED, true);
-        }
+        data.setHumanityPenalty(HUMANITY_KEY, HUMANITY_PENALTY);
 
         if ((player.tickCount % ROLL_INTERVAL_TICKS) != 0) return true;
 
@@ -58,14 +53,7 @@ public class ImmunoboostEffect extends MobEffect {
         if (!(living instanceof Player player)) return;
         if (player.level().isClientSide) return;
 
-        PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
-        if (data == null) return;
-
-        CompoundTag pd = player.getPersistentData();
-        if (pd.getBoolean(NBT_APPLIED)) {
-            data.setHumanity(data.getHumanityBase() + HUMANITY_PENALTY);
-            pd.remove(NBT_APPLIED);
-        }
+        clearHumanityPenalty(player);
     }
 
     private static int countCybernetics(PlayerCyberwareData data) {
@@ -114,5 +102,12 @@ public class ImmunoboostEffect extends MobEffect {
         if (player.getRandom().nextFloat() < chance) {
             player.hurt(player.damageSources().magic(), DAMAGE_AMOUNT);
         }
+    }
+
+    public static void clearHumanityPenalty(Player player) {
+        PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
+        if (data == null) return;
+
+        data.clearHumanityPenalty(HUMANITY_KEY);
     }
 }

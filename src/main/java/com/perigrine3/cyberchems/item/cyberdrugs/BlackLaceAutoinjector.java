@@ -31,8 +31,8 @@ public class BlackLaceAutoinjector extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("item.createcybernetics.blacklace_autoinjector.duration").withStyle(ChatFormatting.BLUE));
-        tooltipComponents.add(Component.translatable("item.createcybernetics.blacklace_autoinjector.desc").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltipComponents.add(Component.translatable("item.cyberchems.blacklace_autoinjector.duration").withStyle(ChatFormatting.BLUE));
+        tooltipComponents.add(Component.translatable("item.cyberchems.blacklace_autoinjector.desc").withStyle(ChatFormatting.DARK_PURPLE));
     }
 
     @Override

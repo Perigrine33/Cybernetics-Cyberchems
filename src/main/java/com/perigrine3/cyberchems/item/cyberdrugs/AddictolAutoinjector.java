@@ -31,8 +31,8 @@ public class AddictolAutoinjector extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("item.createcybernetics.addictol_autoinjector.duration").withStyle(ChatFormatting.BLUE));
-        tooltipComponents.add(Component.translatable("item.createcybernetics.addictol_autoinjector.desc").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltipComponents.add(Component.translatable("item.cyberchems.addictol_autoinjector.duration").withStyle(ChatFormatting.BLUE));
+        tooltipComponents.add(Component.translatable("item.cyberchems.addictol_autoinjector.desc").withStyle(ChatFormatting.DARK_PURPLE));
     }
 
     @Override

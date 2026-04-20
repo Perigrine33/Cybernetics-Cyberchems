@@ -31,8 +31,8 @@ public class ImmunoboostAutoinjector extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("item.createcybernetics.immunoboost_autoinjector.duration").withStyle(ChatFormatting.BLUE));
-        tooltipComponents.add(Component.translatable("item.createcybernetics.immunoboost_autoinjector.desc").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltipComponents.add(Component.translatable("item.cyberchems.immunoboost_autoinjector.duration").withStyle(ChatFormatting.BLUE));
+        tooltipComponents.add(Component.translatable("item.cyberchems.immunoboost_autoinjector.desc").withStyle(ChatFormatting.DARK_PURPLE));
     }
 
     @Override

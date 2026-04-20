@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createcybernetics:empty_autoinjector"
+    },
+    {
+      "type": "neoforge:components",
+      "items": "minecraft:potion",
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "cyberchems:stim_potion"
+        }
+      },
+      "strict": false
+    }
+  ],
+  "result": {
+    "id": "cyberchems:stim_autoinjector",
+    "count": 1
+  },
+  "show_notification": false
+}

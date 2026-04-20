@@ -1,6 +1,7 @@
 package com.perigrine3.cyberchems.potions;
 
 import com.perigrine3.createcybernetics.CreateCybernetics;
+import com.perigrine3.cyberchems.Cyberchems;
 import com.perigrine3.cyberchems.effects.ModEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModPotions {
     public static final DeferredRegister<Potion> POTIONS =
-            DeferredRegister.create(BuiltInRegistries.POTION, CreateCybernetics.MODID);
+            DeferredRegister.create(BuiltInRegistries.POTION, Cyberchems.MODID);
 
     public static final Holder<Potion> ROID = POTIONS.register("roid_potion",
             () -> new Potion(new MobEffectInstance(ModEffects.ROID, 3600, 0)));
