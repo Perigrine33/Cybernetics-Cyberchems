@@ -2,7 +2,6 @@
 /.gradle/
 /build/
 /build/classes/java/main/
-/gradle/
 /run/
 /run/config/
 /run/crash-reports/
