@@ -17,20 +17,23 @@ public abstract class LivingEntityAddictionVanillaShakeMixin {
             method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;getBob(Lnet/minecraft/world/entity/LivingEntity;F)F",
+                    target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V",
                     shift = At.Shift.AFTER
             )
     )
-    private void cc$addictionVanillaShake_anyRenderer(
+    private void cc$applyAddictionShake(
             LivingEntity livingEntity,
             float entityYaw,
             float partialTicks,
             com.mojang.blaze3d.vertex.PoseStack poseStack,
             MultiBufferSource buffer,
             int packedLight,
-            CallbackInfo callbackInfo
+            CallbackInfo ci
     ) {
-        if (livingEntity.getEffect(ModEffects.ADDICTION) == null) return;
+        if (!livingEntity.hasEffect(ModEffects.ADDICTION)) {
+            return;
+        }
+
         float wobbleDegrees = (float) (Math.cos((double) livingEntity.tickCount * 3.25D) * Math.PI * 0.4D);
         poseStack.mulPose(Axis.YP.rotationDegrees(-wobbleDegrees));
     }

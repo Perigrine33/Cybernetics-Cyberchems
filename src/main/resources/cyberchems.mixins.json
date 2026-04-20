@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "LivingEntityAddictionVanillaShakeMixin"
+    "LivingEntityAddictionVanillaShakeMixin",
+    "VillagerAddictionShakeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
