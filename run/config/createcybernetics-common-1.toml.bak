@@ -1,0 +1,11 @@
+#Base Humanity Value
+# Default: 100
+# Range: 50 ~ 1000
+humanity = 100
+#Keep Cyberware on Death
+#If true, cyberware will not drop and will persist through death.
+keepCyberware = false
+#Scale Surgery Damage
+#If true, the surgery chamber will apply damage that scales with the amount of cyberware being removed.
+#If false, the surgery chamber will apply 10 damage.
+scaleSurgeryDamage = false

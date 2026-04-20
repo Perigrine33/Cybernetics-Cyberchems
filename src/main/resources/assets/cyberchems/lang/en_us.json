@@ -1,0 +1,56 @@
+{
+  "item.cyberchems.roid_autoinjector": "Roid Autoinjector",
+  "item.cyberchems.roid_autoinjector.duration": "Roid (20:00)",
+  "item.cyberchems.roid_autoinjector.desc": "Injection Extends Duration to a Full Day",
+
+  "item.cyberchems.stim_autoinjector": "Stim Autoinjector",
+  "item.cyberchems.stim_autoinjector.duration": "Stim (20:00)",
+  "item.cyberchems.stim_autoinjector.desc": "Injection Extends Duration to a Full Day",
+
+  "item.cyberchems.blacklace_autoinjector": "Black Lace Autoinjector",
+  "item.cyberchems.blacklace_autoinjector.duration": "Black Lace (20:00)",
+  "item.cyberchems.blacklace_autoinjector.desc": "Injection Extends Duration to a Full Day",
+
+  "item.cyberchems.immunoboost_autoinjector": "Immunoboost Autoinjector",
+  "item.cyberchems.immunoboost_autoinjector.duration": "Immunoboost (20:00)",
+  "item.cyberchems.immunoboost_autoinjector.desc": "Injection Extends Duration to a Full Day",
+
+  "item.cyberchems.warp_autoinjector": "Warp Autoinjector",
+  "item.cyberchems.warp_autoinjector.duration": "Warp",
+
+  "item.cyberchems.addictol_autoinjector": "Addictol Autoinjector",
+  "item.cyberchems.addictol_autoinjector.duration": "Addictol (10:00)",
+  "item.cyberchems.addictol_autoinjector.desc": "Injection Reduces Duration to Half of a Day",
+
+  "item.minecraft.potion.effect.roid_potion": "Potion of Roid",
+  "item.minecraft.splash_potion.effect.roid_potion": "Splash Potion of Roid",
+  "item.minecraft.lingering_potion.effect.roid_potion": "Lingering Potion of Roid",
+  "item.minecraft.potion.effect.stim_potion": "Potion of Stim",
+  "item.minecraft.splash_potion.effect.stim_potion": "Splash Potion of Stim",
+  "item.minecraft.lingering_potion.effect.stim_potion": "Lingering Potion of Stim",
+  "item.minecraft.potion.effect.blacklace_potion": "Potion of Black Lace",
+  "item.minecraft.splash_potion.effect.blacklace_potion": "Splash Potion of Black Lace",
+  "item.minecraft.lingering_potion.effect.blacklace_potion": "Lingering Potion of Black Lace",
+  "item.minecraft.potion.effect.immunoboost_potion": "Potion of Immunoboost",
+  "item.minecraft.splash_potion.effect.immunoboost_potion": "Splash Potion of Immunoboost",
+  "item.minecraft.lingering_potion.effect.immunoboost_potion": "Lingering Potion of Immunoboost",
+  "item.minecraft.potion.effect.warp_potion": "Potion of Warp",
+  "item.minecraft.splash_potion.effect.warp_potion": "Splash Potion of Warp",
+  "item.minecraft.lingering_potion.effect.warp_potion": "Lingering Potion of Warp",
+  "item.minecraft.potion.effect.addictol_potion": "Potion of Addictol",
+  "item.minecraft.splash_potion.effect.addictol_potion": "Splash Potion of Addictol",
+  "item.minecraft.lingering_potion.effect.addictol_potion": "Lingering Potion of Addictol",
+
+
+
+
+
+  "effect.cyberchems.roid": "Roid",
+  "effect.cyberchems.stim": "Stim",
+  "effect.cyberchems.blacklace": "Black Lace",
+  "effect.cyberchems.immunoboost": "Immunoboost",
+  "effect.cyberchems.warp": "Warp",
+  "effect.cyberchems.addictol": "Addictol",
+
+  "effect.cyberchems.addiction": "Addiction"
+}
