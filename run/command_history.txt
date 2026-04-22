@@ -1,8 +1,0 @@
-/effect clear
-/effect give Dev cyberchems:addiction
-/effect clear
-/effect clear 1f42f2d2-1889-47ab-983e-4302d9467c9e
-/effect give 1f42f2d2-1889-47ab-983e-4302d9467c9e cyberchems:addiction
-/kill 1f42f2d2-1889-47ab-983e-4302d9467c9e
-/effect give 1f42f2d2-1889-47ab-983e-4302d9467c9e cyberchems:addiction
-/effect give d9592cd8-7354-42d3-bdab-941b53acdf5f cyberchems:addiction

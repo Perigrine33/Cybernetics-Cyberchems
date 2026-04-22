@@ -1,10 +1,10 @@
 {
   "values": [
-    "createcybernetics:roid_autoinjector",
-    "createcybernetics:stim_autoinjector",
-    "createcybernetics:blacklace_autoinjector",
-    "createcybernetics:immunoboost_autoinjector",
-    "createcybernetics:warp_autoinjector",
-    "createcybernetics:addictol_autoinjector"
+    "cyberchems:roid_autoinjector",
+    "cyberchems:stim_autoinjector",
+    "cyberchems:blacklace_autoinjector",
+    "cyberchems:immunoboost_autoinjector",
+    "cyberchems:warp_autoinjector",
+    "cyberchems:addictol_autoinjector"
   ]
 }
