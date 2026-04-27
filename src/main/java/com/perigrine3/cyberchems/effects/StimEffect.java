@@ -71,6 +71,10 @@ public class StimEffect extends MobEffect {
 
         clearHumanityPenalty(player);
 
+        if (player.isDeadOrDying() || player.isRemoved() || reason == Entity.RemovalReason.KILLED) {
+            return;
+        }
+
         player.addEffect(new MobEffectInstance(
                 MobEffects.MOVEMENT_SLOWDOWN,
                 AFTER_SLOWNESS_TICKS,
