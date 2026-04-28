@@ -1,5 +1,6 @@
 package com.perigrine3.cyberchems.item.cyberdrugs;
 
+import com.perigrine3.createcybernetics.api.ISpinalInjectableItem;
 import com.perigrine3.createcybernetics.item.ModItems;
 import com.perigrine3.cyberchems.effects.ModEffects;
 import net.minecraft.ChatFormatting;
@@ -20,9 +21,10 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class WarpAutoinjector extends Item {
+public class WarpAutoinjector extends Item implements ISpinalInjectableItem {
 
     private static final int CHARGE_TICKS = 16;
+    private static final int EFFECT_DURATION = 20;
     private static final int EFFECT_AMPLIFIER = 0;
 
     public WarpAutoinjector(Properties properties) {
@@ -62,11 +64,14 @@ public class WarpAutoinjector extends Item {
         player.stopUsingItem();
 
         if (level.isClientSide) return;
-        player.addEffect(new MobEffectInstance(ModEffects.WARP, 20, EFFECT_AMPLIFIER));
+
+        player.addEffect(new MobEffectInstance(ModEffects.WARP, EFFECT_DURATION, EFFECT_AMPLIFIER));
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_HURT, SoundSource.PLAYERS, 0.25F, 1.2F);
+
         player.awardStat(Stats.ITEM_USED.get(this));
+
         if (!player.getAbilities().instabuild) {
             stack.shrink(1);
 
@@ -77,5 +82,10 @@ public class WarpAutoinjector extends Item {
                 player.drop(empty, false);
             }
         }
+    }
+
+    @Override
+    public List<MobEffectInstance> getSpinalInjectionEffects(ItemStack stack) {
+        return List.of(new MobEffectInstance(ModEffects.WARP, EFFECT_DURATION, EFFECT_AMPLIFIER));
     }
 }
