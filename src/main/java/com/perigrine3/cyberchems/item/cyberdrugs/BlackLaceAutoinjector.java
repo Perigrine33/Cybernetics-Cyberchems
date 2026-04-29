@@ -5,6 +5,7 @@ import com.perigrine3.createcybernetics.item.ModItems;
 import com.perigrine3.cyberchems.effects.ModEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -26,6 +27,7 @@ public class BlackLaceAutoinjector extends Item implements ISpinalInjectableItem
     private static final int CHARGE_TICKS = 16;
     private static final int EFFECT_DURATION = 24000;
     private static final int EFFECT_AMPLIFIER = 0;
+    private static final int MAX_EFFECT_AMPLIFIER = 3;
 
     public BlackLaceAutoinjector(Properties properties) {
         super(properties);
@@ -65,7 +67,7 @@ public class BlackLaceAutoinjector extends Item implements ISpinalInjectableItem
 
         if (level.isClientSide) return;
 
-        player.addEffect(new MobEffectInstance(ModEffects.BLACKLACE, EFFECT_DURATION, EFFECT_AMPLIFIER));
+        applyDose(player);
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.PLAYER_HURT, SoundSource.PLAYERS, 0.25F, 1.2F);
@@ -82,6 +84,34 @@ public class BlackLaceAutoinjector extends Item implements ISpinalInjectableItem
                 player.drop(empty, false);
             }
         }
+    }
+
+    private static int getNextAmplifier(Player player) {
+        MobEffectInstance current = player.getEffect(ModEffects.BLACKLACE);
+        if (current == null) {
+            return EFFECT_AMPLIFIER;
+        }
+
+        return Math.min(MAX_EFFECT_AMPLIFIER, current.getAmplifier() + 1);
+    }
+
+    private static void applyDose(Player player) {
+        player.addEffect(new MobEffectInstance(
+                ModEffects.BLACKLACE,
+                EFFECT_DURATION,
+                getNextAmplifier(player)
+        ));
+    }
+
+    @Override
+    public boolean shouldSpinalInjectorInject(ServerPlayer player, ItemStack stack) {
+        MobEffectInstance current = player.getEffect(ModEffects.BLACKLACE);
+        return current == null || current.getAmplifier() < MAX_EFFECT_AMPLIFIER;
+    }
+
+    @Override
+    public void applySpinalInjection(ServerPlayer player, ItemStack stack) {
+        applyDose(player);
     }
 
     @Override
