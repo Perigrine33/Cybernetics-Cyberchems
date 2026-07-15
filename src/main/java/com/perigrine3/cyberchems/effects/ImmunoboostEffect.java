@@ -3,6 +3,7 @@ package com.perigrine3.cyberchems.effects;
 import com.perigrine3.createcybernetics.common.capabilities.ModAttachments;
 import com.perigrine3.createcybernetics.common.capabilities.PlayerCyberwareData;
 import com.perigrine3.createcybernetics.util.ModTags;
+import com.perigrine3.cyberchems.compat.CyberneticsHumanityCompat;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -44,7 +45,11 @@ public class ImmunoboostEffect extends MobEffect {
             return true;
         }
 
-        data.setHumanityPenalty(player, HUMANITY_KEY, HUMANITY_PENALTY);
+        CyberneticsHumanityCompat.setPenalty(
+                player,
+                HUMANITY_KEY,
+                HUMANITY_PENALTY
+        );
 
         if ((player.tickCount % ROLL_INTERVAL_TICKS) != 0) {
             return true;
@@ -147,11 +152,9 @@ public class ImmunoboostEffect extends MobEffect {
     }
 
     public static void clearHumanityPenalty(Player player) {
-        PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
-        if (data == null) {
-            return;
-        }
-
-        data.clearHumanityPenalty(player, HUMANITY_KEY);
+        CyberneticsHumanityCompat.clearPenalty(
+                player,
+                HUMANITY_KEY
+        );
     }
 }

@@ -103,12 +103,12 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
 dependencies {
-    implementation "curse.maven:cybernetics-1430192:8074302"
-
-
+    implementation "curse.maven:cybernetics-1430192:8435586"
     implementation ("curse.maven:jei-238222:6589027")
 
     implementation "curse.maven:create-328085:7408951"
+
+    //implementation "curse.maven:minecraft-comes-alive-reborn-535291:8434226"
 
 }
 

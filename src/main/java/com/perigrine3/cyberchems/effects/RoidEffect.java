@@ -3,6 +3,7 @@ package com.perigrine3.cyberchems.effects;
 import com.perigrine3.createcybernetics.common.capabilities.ModAttachments;
 import com.perigrine3.createcybernetics.common.capabilities.PlayerCyberwareData;
 import com.perigrine3.cyberchems.Cyberchems;
+import com.perigrine3.cyberchems.compat.CyberneticsHumanityCompat;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -132,22 +133,22 @@ public class RoidEffect extends MobEffect {
     }
 
     private static void applyHumanityPenalty(Player player, int amplifier) {
-        PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
-        if (data == null) {
-            return;
-        }
+        int penalty =
+                HUMANITY_PENALTY_BASE
+                        + amplifier * HUMANITY_PENALTY_PER_EXTRA;
 
-        int penalty = HUMANITY_PENALTY_BASE + (amplifier * HUMANITY_PENALTY_PER_EXTRA);
-        data.setHumanityPenalty(player, HUMANITY_KEY, penalty);
+        CyberneticsHumanityCompat.setPenalty(
+                player,
+                HUMANITY_KEY,
+                penalty
+        );
     }
 
     public static void clearHumanityPenalty(Player player) {
-        PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
-        if (data == null) {
-            return;
-        }
-
-        data.clearHumanityPenalty(player, HUMANITY_KEY);
+        CyberneticsHumanityCompat.clearPenalty(
+                player,
+                HUMANITY_KEY
+        );
     }
 
     private static void applyOrUpdateScaledModifiers(Player player, int amplifier) {

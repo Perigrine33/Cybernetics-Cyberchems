@@ -3,6 +3,7 @@ package com.perigrine3.cyberchems.effects;
 import com.perigrine3.createcybernetics.common.capabilities.ModAttachments;
 import com.perigrine3.createcybernetics.common.capabilities.PlayerCyberwareData;
 import com.perigrine3.cyberchems.Cyberchems;
+import com.perigrine3.cyberchems.compat.CyberneticsHumanityCompat;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
@@ -95,24 +96,24 @@ public class StimEffect extends MobEffect {
     }
 
     private static void applyHumanityPenalty(Player player, int amplifier) {
-        PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
-        if (data == null) {
-            return;
-        }
+        int level =
+                amplifier + 1;
 
-        int level = amplifier + 1;
-        int penalty = level * HUMANITY_PENALTY_PER_LEVEL;
+        int penalty =
+                level * HUMANITY_PENALTY_PER_LEVEL;
 
-        data.setHumanityPenalty(player, HUMANITY_KEY, penalty);
+        CyberneticsHumanityCompat.setPenalty(
+                player,
+                HUMANITY_KEY,
+                penalty
+        );
     }
 
     private static void clearHumanityPenalty(Player player) {
-        PlayerCyberwareData data = player.getData(ModAttachments.CYBERWARE);
-        if (data == null) {
-            return;
-        }
-
-        data.clearHumanityPenalty(player, HUMANITY_KEY);
+        CyberneticsHumanityCompat.clearPenalty(
+                player,
+                HUMANITY_KEY
+        );
     }
 
     private static void ensureEffect(Player player, int amplifier) {

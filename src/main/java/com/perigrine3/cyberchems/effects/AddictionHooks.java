@@ -1,8 +1,7 @@
 package com.perigrine3.cyberchems.effects;
 
-import com.perigrine3.createcybernetics.common.capabilities.ModAttachments;
-import com.perigrine3.createcybernetics.common.capabilities.PlayerCyberwareData;
 import com.perigrine3.cyberchems.Cyberchems;
+import com.perigrine3.cyberchems.compat.CyberneticsHumanityCompat;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,10 +14,14 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 @EventBusSubscriber(modid = Cyberchems.MODID)
 public final class AddictionHooks {
 
-    private static final String HUMANITY_KEY = "cc_drug_penalty_addiction";
-    private static final int HUMANITY_PENALTY = 10;
+    public static final String HUMANITY_KEY =
+            "cc_drug_penalty_addiction";
 
-    private static final String NBT_ADDICTED = "cc_addicted";
+    private static final int HUMANITY_PENALTY =
+            10;
+
+    public static final String NBT_ADDICTED =
+            "cc_addicted";
 
     private AddictionHooks() {}
 
@@ -29,21 +32,18 @@ public final class AddictionHooks {
     }
 
     private static void setAddictionPenalty(Player player) {
-        PlayerCyberwareData cyberwareData = player.getData(ModAttachments.CYBERWARE);
-        if (cyberwareData == null) {
-            return;
-        }
-
-        cyberwareData.setHumanityPenalty(player, HUMANITY_KEY, HUMANITY_PENALTY);
+        CyberneticsHumanityCompat.setPenalty(
+                player,
+                HUMANITY_KEY,
+                HUMANITY_PENALTY
+        );
     }
 
-    private static void clearAddictionPenalty(Player player) {
-        PlayerCyberwareData cyberwareData = player.getData(ModAttachments.CYBERWARE);
-        if (cyberwareData == null) {
-            return;
-        }
-
-        cyberwareData.clearHumanityPenalty(player, HUMANITY_KEY);
+    public static void clearAddictionPenalty(Player player) {
+        CyberneticsHumanityCompat.clearPenalty(
+                player,
+                HUMANITY_KEY
+        );
     }
 
     private static void ensureAddiction(LivingEntity livingEntity) {
@@ -51,8 +51,14 @@ public final class AddictionHooks {
             return;
         }
 
-        CompoundTag persistentData = livingEntity.getPersistentData();
+        CompoundTag persistentData =
+                livingEntity.getPersistentData();
+
         if (!persistentData.getBoolean(NBT_ADDICTED)) {
+            if (livingEntity instanceof Player player) {
+                clearAddictionPenalty(player);
+            }
+
             return;
         }
 
@@ -68,8 +74,11 @@ public final class AddictionHooks {
             return;
         }
 
-        MobEffectInstance currentAddiction = livingEntity.getEffect(ModEffects.ADDICTION);
-        if (currentAddiction == null || currentAddiction.getDuration() <= 20) {
+        MobEffectInstance currentAddiction =
+                livingEntity.getEffect(ModEffects.ADDICTION);
+
+        if (currentAddiction == null
+                || currentAddiction.getDuration() <= 20) {
             livingEntity.addEffect(new MobEffectInstance(
                     ModEffects.ADDICTION,
                     AddictionEffect.DURATION_7_DAYS_TICKS,
@@ -88,17 +97,23 @@ public final class AddictionHooks {
     @SubscribeEvent
     public static void onEffectAdded(MobEffectEvent.Added event) {
         LivingEntity livingEntity = event.getEntity();
+
         if (livingEntity.level().isClientSide) {
             return;
         }
 
-        MobEffectInstance effectInstance = event.getEffectInstance();
+        MobEffectInstance effectInstance =
+                event.getEffectInstance();
+
         if (effectInstance == null) {
             return;
         }
 
         if (effectInstance.is(ModEffects.ADDICTION)) {
-            livingEntity.getPersistentData().putBoolean(NBT_ADDICTED, true);
+            livingEntity.getPersistentData().putBoolean(
+                    NBT_ADDICTED,
+                    true
+            );
 
             if (livingEntity instanceof Player player) {
                 setAddictionPenalty(player);
@@ -110,12 +125,15 @@ public final class AddictionHooks {
         if (effectInstance.is(ModEffects.ROID)
                 || effectInstance.is(ModEffects.STIM)
                 || effectInstance.is(ModEffects.BLACKLACE)) {
-            if (livingEntity.getPersistentData().getBoolean(NBT_ADDICTED)) {
-                livingEntity.removeEffect(ModEffects.ADDICTION);
+            if (!livingEntity.getPersistentData()
+                    .getBoolean(NBT_ADDICTED)) {
+                return;
+            }
 
-                if (livingEntity instanceof Player player) {
-                    clearAddictionPenalty(player);
-                }
+            livingEntity.removeEffect(ModEffects.ADDICTION);
+
+            if (livingEntity instanceof Player player) {
+                clearAddictionPenalty(player);
             }
         }
     }
@@ -123,16 +141,20 @@ public final class AddictionHooks {
     @SubscribeEvent
     public static void onEffectRemoved(MobEffectEvent.Remove event) {
         LivingEntity livingEntity = event.getEntity();
+
         if (livingEntity.level().isClientSide) {
             return;
         }
 
-        MobEffectInstance effectInstance = event.getEffectInstance();
+        MobEffectInstance effectInstance =
+                event.getEffectInstance();
+
         if (effectInstance == null) {
             return;
         }
 
-        if (effectInstance.is(ModEffects.ADDICTION) && livingEntity instanceof Player player) {
+        if (effectInstance.is(ModEffects.ADDICTION)
+                && livingEntity instanceof Player player) {
             clearAddictionPenalty(player);
         }
     }
@@ -140,16 +162,20 @@ public final class AddictionHooks {
     @SubscribeEvent
     public static void onEffectExpired(MobEffectEvent.Expired event) {
         LivingEntity livingEntity = event.getEntity();
+
         if (livingEntity.level().isClientSide) {
             return;
         }
 
-        MobEffectInstance effectInstance = event.getEffectInstance();
+        MobEffectInstance effectInstance =
+                event.getEffectInstance();
+
         if (effectInstance == null) {
             return;
         }
 
-        if (effectInstance.is(ModEffects.ADDICTION) && livingEntity instanceof Player player) {
+        if (effectInstance.is(ModEffects.ADDICTION)
+                && livingEntity instanceof Player player) {
             clearAddictionPenalty(player);
         }
     }
